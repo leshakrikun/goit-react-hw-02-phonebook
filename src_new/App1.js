@@ -3,7 +3,6 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Phonebook from './components/PhoneBook/phoneBook';
 import Contacts from './components/Contacts/contacts';
-import Filter from './components/Filter/filter';
 export default class App1 extends React.Component {
   state = {
     contacts: [
@@ -21,16 +20,7 @@ handleChange = (e) => {
   const {name, value} = e.target
   this.setState({[name]:value});
 }
-
-handleFilter = () => {
-  const { filter, contacts } = this.state;
-console.log("fvff", this.state);
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()),
-  );
-};
-
-
+      
 handleSubmit = e => {
     e.preventDefault();
     const form = e.target 
@@ -43,12 +33,10 @@ handleSubmit = e => {
     })
 };
 render() {
-  const { name, number, filter } = this.state;
     return (
      <>
         <Phonebook handleSubmit={this.handleSubmit} handleChange={this.handleChange} updateInputNumber={this.updateInputNumber}/>
-        <Filter filter={filter} handleChange={this.handleChange} />
-        <Contacts state = {this.state.contacts} handleChange={this.handleFilter}/>
+        <Contacts state = {this.state.contacts}/>
      </>
   )}}
 

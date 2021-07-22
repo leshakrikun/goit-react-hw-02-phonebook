@@ -18,18 +18,22 @@ export default class App1 extends React.Component {
   }
 
 handleChange = (e) => {
-  const {name, value} = e.target
+  const {name, value, filter} = e.target
   this.setState({[name]:value});
 }
 
-handleFilter = () => {
-  const { filter, contacts } = this.state;
-console.log("fvff", this.state);
-  return contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()),
-  );
+changeFilter = e => {
+  this.setState({ filter: e.currentTarget.value });
 };
 
+getVisibleTodos = () => {
+  const { filter, contacts } = this.state;
+  const normalizedFilter = filter.toLowerCase();
+
+  return contacts.filter(todo =>
+    todo.name.toLowerCase().includes(normalizedFilter),
+  );
+};
 
 handleSubmit = e => {
     e.preventDefault();
@@ -42,13 +46,28 @@ handleSubmit = e => {
       )
     })
 };
+
+//******************************************************************* */
+deleteTodo = todoId => {
+console.log(todoId);
+  this.setState(prevState => ({
+    
+    state: prevState.contacts.filter(state => state.id !== todoId),
+  }));
+};
+//*********************************************************************** */
+
+
+
+
+
 render() {
-  const { name, number, filter } = this.state;
+  const { filter } = this.state;
+  const visibleTodos = this.getVisibleTodos();
     return (
      <>
-        <Phonebook handleSubmit={this.handleSubmit} handleChange={this.handleChange} updateInputNumber={this.updateInputNumber}/>
-        <Filter filter={filter} handleChange={this.handleChange} />
-        <Contacts state = {this.state.contacts} handleChange={this.handleFilter}/>
+        <Phonebook state = {this.state.contacts} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
+        <Filter value={filter} onChange={this.changeFilter} />
+        <Contacts state = {this.state.contacts} todos={visibleTodos} onDeleteTodo={this.deleteTodo}/>
      </>
   )}}
-

@@ -1,25 +1,23 @@
 import React from 'react';
 import s from './contacts.module.css';
 
-const Contacts  = ({state, todos, onDeleteTodo}) => {
+const Contacts  = ({contacts, onDelete}) => {
      return (
-         <>
-        <ul>
-        {todos.map(state =>(
+         <div className={s.contactListformat}>
+        <ul className={s.contactList}>
+        {contacts.map(state =>(
             <li key={state.id}>
-                {state.name}:
+                {state.name}: { }
                 {state.number}
                 <button
           type="button"
-          className="TodoList__btn"
-          onClick={() => onDeleteTodo(state.id)}
-        >
+          className={s.contactItem__btn}
+          onClick={() => onDelete(state.id)}>
           Удалить
         </button>
             </li>
-
         ))}
         </ul>
-        </>
+        </div>
     )}
 export default  Contacts;

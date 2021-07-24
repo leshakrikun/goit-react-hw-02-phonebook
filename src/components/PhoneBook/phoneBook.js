@@ -5,10 +5,11 @@ import s from './phonebook.module.css';
 function Phonebook ({handleSubmit, handleChange, state})  {
 const {name, number} = state
     return (
-        <div>
+        <div className={s.phonebook}>
         <h2>Phonebook</h2>
+         
+         <div className={s.formPhoneBook}>
          <p>Name</p>
-         <div>
          <form onSubmit={handleSubmit}>    
          <input
          type="text"

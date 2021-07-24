@@ -12,9 +12,6 @@ code {
     monospace;
 }
 ul {
-  /* list-style-type: none; */
-  margin: 0;
-  padding-left: 0;
 }
 
 img {
@@ -22,4 +19,12 @@ img {
 }
 h2 {
   text-align: center;
+}
+button {
+  cursor: pointer;
+}
+button:hover,
+button:focus {
+  background: blue;
+  color: bisque;
 }
